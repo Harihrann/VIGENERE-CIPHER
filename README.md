@@ -1,6 +1,5 @@
 # VIGENERE-CIPHER
 ## EX. NO: 4
- 
 
 ## IMPLEMETATION OF VIGENERE CIPHER
  
@@ -30,7 +29,64 @@ STEP-8: Repeat the above steps to generate the entire cipher text.
 
 
 ## PROGRAM
+```
+Name : Hariharan S
+reg no : 212224040101
+```
+```
+#include <stdio.h>
+#include <string.h>
+#include <ctype.h>
 
-## OUTPUT
+void vigenere_encrypt(char *msg, char *key, char *enc) {
+    int msgLen = strlen(msg), keyLen = strlen(key);
+    for (int i = 0, j = 0; i < msgLen; i++) {
+        if (isalpha(msg[i])) {
+            enc[i] = ((toupper(msg[i]) - 'A' + toupper(key[j % keyLen]) - 'A') % 26) + 'A';
+            j++;
+        } else {
+            enc[i] = msg[i];
+        }
+    }
+    enc[msgLen] = '\0';
+}
 
-## RESULT
+void vigenere_decrypt(char *enc, char *key, char *dec) {
+    int encLen = strlen(enc), keyLen = strlen(key);
+    for (int i = 0, j = 0; i < encLen; i++) {
+        if (isalpha(enc[i])) {
+            dec[i] = ((toupper(enc[i]) - 'A' - (toupper(key[j % keyLen]) - 'A') + 26) % 26) + 'A';
+            j++;
+        } else {
+            dec[i] = enc[i];
+        }
+    }
+    dec[encLen] = '\0';
+}
+
+int main() {
+    char msg[1000], key[100];
+    char enc[1000], dec[1000];
+    
+    printf("Simulation of Vigenere Cipher\n");
+    printf("Enter the message: ");
+    scanf(" %s", msg);
+    printf("Enter the key: ");
+    scanf(" %s", key);
+    
+    vigenere_encrypt(msg, key, enc);
+    printf("Encrypted Message: %s\n", enc);
+    
+    vigenere_decrypt(enc, key, dec);
+    printf("Decrypted Message: %s\n", dec);
+    
+    return 0;
+}
+```
+## OUTPUT:
+<img width="1918" height="912" alt="image" src="https://github.com/user-attachments/assets/9285e469-fa0c-4ea0-80eb-25c94b1261b6" />
+
+
+## RESULT:
+
+Thus the implementation of vigenere cipher had been executed successfully
